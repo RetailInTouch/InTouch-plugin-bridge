@@ -4,7 +4,7 @@
   "description": "",
   "author": "Tim Honders",
   "license": "MIT",
-  "repository": "RetailInTouch/InTouch-plugin",
+  "repository": "RetailInTouch/InTouch-plugin-bridge",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
