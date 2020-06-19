@@ -9,6 +9,16 @@ import CircularProgress     from '@material-ui/core/CircularProgress';
 import IntouchBridge        from './IntouchBridge';
 import createIntouchTheme   from './IntouchTheme';
 
+import devdata              from './dev-data.json';
+
+const inIframe = () => {
+    try {
+        return window.self !== window.top;
+    } catch (e) {
+        return true;
+    }
+}
+
 class IntouchProvider extends Component {
 
     constructor(props) {
@@ -18,6 +28,8 @@ class IntouchProvider extends Component {
 
         this.bridge = new IntouchBridge(origin);
 
+        const iframe = inIframe();
+
         this.state = {
             loading: true,
 
@@ -25,10 +37,10 @@ class IntouchProvider extends Component {
             bridge: this.bridge,
 
             theme: null,
-            user: null,
-            language: null,
-            userGroups: null,
-            orgunits: null
+            user: (iframe ? null : devdata.user),
+            language: (iframe ? null : devdata.language),
+            userGroups: (iframe ? null : devdata.userGroups),
+            orgunits: (iframe ? null : devdata.orgunits),
         }
 
         this.userDate_listener = this.bridge.subscribe('userData', this.onUserData);

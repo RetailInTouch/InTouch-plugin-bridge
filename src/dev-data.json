@@ -1,0 +1,116 @@
+{
+    "user": {
+        "_id":"5e7b57fe1e287b62108e5a79",
+        "pushPreferences":{
+           "allPushOff":false,
+           "pushForChat":true,
+           "pushForNews":true,
+           "pushForComments":true,
+           "pushForLike":true
+        },
+        "is_admin":true,
+        "permanentPassword":true,
+        "firstLoginDone":true,
+        "pushSubscription":false,
+        "preferredLanguage":"nl",
+        "systemTags":[
+           "Winkel",
+           "Contentmanager"
+        ],
+        "active":true,
+        "orgunits":[
+           "A01"
+        ],
+        "groups":[
+           "E7"
+        ],
+        "roles":[
+           {
+              "_id":"5db1c751f6ec7279b3dca453",
+              "name":"standardUser"
+           }
+        ],
+        "firstName":"Test",
+        "insertion":"",
+        "lastName":"User",
+        "email":"test@kega.nl",
+        "address":"",
+        "city":"",
+        "phone":"",
+        "dob":null,
+        "profilePicture":"",
+        "organisation":"Kega",
+        "position":"Test",
+        "isVerified":true,
+        "loginName":"test@kega.nl",
+        "name":"Test User",
+        "chatUserId":00000,
+        "nameCI":"test user",
+        "permissions":[
+           "users.getOwnData",
+           "users.patchOwnData",
+           "users.find",
+           "users.get"
+        ],
+        "points":0
+    },
+    "language": [
+        "pl",
+        "en"
+    ],
+    "userGroups": {
+        "E2":{
+           "_id":"E2",
+           "name":"Afdelingsmanager"
+        },
+        "E7":{
+           "_id":"E7",
+           "name":"Contentmanager"
+        },
+        "E8":{
+           "_id":"E8",
+           "name":"Groente & Fruit"
+        },
+        "E11":{
+           "_id":"E11",
+           "name":"HQ"
+        },
+        "E4":{
+           "_id":"E4",
+           "name":"KW"
+        }
+    },
+    "orgunits":{ "A01": {
+        "_id":"A01",
+        "namepath":",Winkel,",
+        "name":"Winkel",
+        "description":"Company level",
+        "ancestors":[
+
+        ],
+        "children":[
+            "A02",
+            "A27"
+        ],
+        "parent":null,
+        "idpath":",A01,",
+        "depflags":[
+            "B1",
+            "B2",
+            "B3"
+        ],
+        "storeflags":[
+            "C1",
+            "C2",
+            "C3",
+            "C4"
+        ],
+        "serviceflags":[
+            "D1",
+            "D2"
+        ],
+            "type":"Root",
+            "descendants":[]
+        }
+    }
+}
