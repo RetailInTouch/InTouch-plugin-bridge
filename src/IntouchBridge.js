@@ -1,9 +1,21 @@
+import devdata              from './dev-data.json';
+
+const inIframe = () => {
+    try {
+        return window.self !== window.top;
+    } catch (e) {
+        return true;
+    }
+}
+
 class IntouchBridge {
 
     constructor(origin) {
 
         this.origin = origin;
         this.listeners = {};
+        this.iframe = inIframe();
+
 
         window.addEventListener('message', this.receiveMessage.bind(this));
     }
@@ -22,6 +34,7 @@ class IntouchBridge {
             switch (data.action) {
 
                 case 'userData':
+                    if (!this.iframe) { data.data = devdata.user; }
                     this.dispatch('userData', data.data)
                     break;
 
@@ -30,14 +43,17 @@ class IntouchBridge {
                     break;
 
                 case 'languageConfig':
+                    if (!this.iframe) { data.data = devdata.language; }
                     this.dispatch('languageConfig', data.data)
                     break;
 
                 case 'groups':
+                    if (!this.iframe) { data.data = devdata.userGroups; }
                     this.dispatch('groups', data.data)
                     break;
 
                 case 'orgChart':
+                    if (!this.iframe) { data.data = devdata.orgunits; }
                     this.dispatch('orgChart', data.data)
                     break;
 

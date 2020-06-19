@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { 
   IntouchProvider,
   IntouchRouter 
-}                           from 'intouch-plugin'
+}                           from 'intouch-plugin-bridge'
 
 class App extends Component {
 
