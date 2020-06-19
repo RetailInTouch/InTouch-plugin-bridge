@@ -44,7 +44,7 @@
         "isVerified":true,
         "loginName":"test@kega.nl",
         "name":"Test User",
-        "chatUserId":00000,
+        "chatUserId":100000,
         "nameCI":"test user",
         "permissions":[
            "users.getOwnData",
