@@ -148,9 +148,7 @@ class IntouchBridge {
     }
 
     navigate(page) {
-        console.log('navigate: ', {
-            page: page
-        });
+
         this.postMessage('navigate', {
             page: page
         });
