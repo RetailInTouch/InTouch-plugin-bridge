@@ -144,13 +144,15 @@ class IntouchBridge {
         this.postMessage('locationChange', {
             location: location
         });
+
     }
 
-    navigate(path) {
+    navigate(page) {
 
         this.postMessage('navigate', {
-            path: path
+            page: page
         });
+        
     }
 
     setIframeHeight(height) {
