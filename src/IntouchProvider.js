@@ -80,7 +80,7 @@ class IntouchProvider extends Component {
 
     onLanguageConfig = (language) => {
         this.setState({ 
-            language: (Object.keys(language).length === 0 ? ['nl'] : language.availableLanguages) 
+            language: (language.availableLanguages ? language.availableLanguages : language) 
         }, this.checkLoading);
     }
 
