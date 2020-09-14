@@ -1,21 +1,13 @@
 import devdata              from './dev-data.json';
 
-const inIframe = () => {
-    try {
-        return window.self !== window.top;
-    } catch (e) {
-        return true;
-    }
-}
-
 class IntouchBridge {
 
-    constructor(origin) {
+    constructor(origin, iframe=true, debug=false) {
 
         this.origin = origin;
         this.listeners = {};
-        this.iframe = inIframe();
-
+        this.iframe = iframe;
+        this.debug = debug;
 
         window.addEventListener('message', this.receiveMessage.bind(this));
     }
@@ -27,7 +19,16 @@ class IntouchBridge {
     receiveMessage(event) {
         const { origin, data } = event;
 
-        if (origin !== this.origin && this.origin !== '*') { return; }
+        if (origin !== this.origin && this.origin !== '*') { 
+            this.log('[IntouchBridge] receiveMessage wrong origin:' + origin + ' ' + this.origin);
+            return; 
+        }
+
+        if (data.action === undefined) {
+            return; 
+        }
+
+        this.log('[IntouchBridge] receiveMessage ' + data.action , data);
 
         if (data.action) {
 
@@ -82,14 +83,22 @@ class IntouchBridge {
 
     }
 
-    postMessage(action, data) {
+    postMessage(action, data=null) {
 
         const payload = {
             action: action,
             ...data
         }
 
+        this.log('[IntouchBridge] postMessage ' + action, data);
+
         window.top.postMessage(payload, this.origin);
+    }
+
+    log(message, ...args) {
+        if (this.debug) {
+            console.log(message, args);
+        }
     }
     
     subscribe(action, callback) {

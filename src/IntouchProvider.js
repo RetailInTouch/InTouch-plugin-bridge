@@ -9,6 +9,32 @@ import CircularProgress     from '@material-ui/core/CircularProgress';
 import IntouchBridge        from './IntouchBridge';
 import createIntouchTheme   from './IntouchTheme';
 
+const inIframe = () => {
+    try {
+        return window.self !== window.top;
+    } catch (e) {
+        return true;
+    }
+}
+
+const isDebug = () => {
+    try {
+
+        let search = '';
+        if (inIframe()) {
+            search = window.self.location.search;
+        } else {
+            search = window.top.location.search;
+        }
+
+        const urlParams = new URLSearchParams(search);
+        return (urlParams.get('debug') === 'true');
+
+    } catch (e) {
+        return true;
+    }
+}
+
 class IntouchProvider extends Component {
 
     constructor(props) {
@@ -16,7 +42,10 @@ class IntouchProvider extends Component {
 
         const { api, origin } = props.config;
 
-        this.bridge = new IntouchBridge(origin);
+        this.debug = isDebug()
+        this.iframe = inIframe();
+
+        this.bridge = new IntouchBridge(origin, this.iframe, this.debug);
 
         this.state = {
             loading: true,
@@ -29,6 +58,10 @@ class IntouchProvider extends Component {
             language: null,
             userGroups: null,
             orgunits: null
+        }
+
+        if (this.debug) {
+            console.log('[IntouchProvider] Start loading data via postmessage...')
         }
 
         this.userDate_listener = this.bridge.subscribe('userData', this.onUserData);
@@ -97,6 +130,13 @@ class IntouchProvider extends Component {
         const { user, theme, language, userGroups, orgunits, loading } = this.state;
 
         const new_loading = !(user !== null && theme !== null && language !== null && userGroups !== null && orgunits !== null )
+
+        if (this.debug) {
+            console.log('[IntouchProvider] checkLoading: ', new_loading);
+            if (!new_loading) {
+                console.log('[IntouchProvider] state: ', this.state);
+            }
+        }
 
         if (onBeforeLift !== null && new_loading !== loading) {
             Promise.resolve(onBeforeLift(user)).finally(() => {
