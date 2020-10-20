@@ -19,6 +19,8 @@ class IntouchBridge {
     receiveMessage(event) {
         const { origin, data } = event;
 
+        this.log('[IntouchBridge] receiveMessage ', event);
+
         if (origin !== this.origin && this.origin !== '*') { 
             this.log('[IntouchBridge] receiveMessage wrong origin:' + origin + ' ' + this.origin);
             return; 
@@ -72,6 +74,10 @@ class IntouchBridge {
 
                 case 'locationPop':
                     this.dispatch('locationPop')
+                    break;
+
+                case 'barcode':
+                    this.dispatch('barcode', data.data)
                     break;
 
                 default:
@@ -165,10 +171,17 @@ class IntouchBridge {
     }
 
     setIframeHeight(height) {
-
         this.postMessage('changeIframeHeight', {
             height: height
         });
+    }
+
+    startScanner() {
+        this.postMessage('startScanner');
+    }
+
+    stopScanner() {
+        this.postMessage('stopScanner');
     }
 
 }
